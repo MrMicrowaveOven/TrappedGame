@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Trapped</title>
+    <style>
+    	* { padding: 0; margin: 0; }
+    	canvas { background: #eee; display: block; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+<canvas id="myCanvas" width="720" height="480"></canvas>
+
+<script>
+
+// Canvas
+  var canvas = document.getElementById("myCanvas");
+  var ctx = canvas.getContext("2d");
+
+  var gridX = 5;
+  var gridY = 5;
+  var squares = [];
+
+  var clickX;
+  var clickY;
+  var theSquare;
+
+  var spaceBetween = 5;
+
+  function drawGrid(tlx, tly, brx, bry) {
+    var widthOfEach = (brx - tlx)/gridX - spaceBetween;
+    var heightOfEach = (bry - tly)/gridY - spaceBetween;
+    var thisSquareX = tlx;
+    var thisSquareY = tly;
+    for (var i = 0; i < gridX; i++) {
+      for (var j = 0; j < gridY; j++) {
+        drawSquare(thisSquareX, thisSquareY, widthOfEach, heightOfEach, "#0095DD");
+        squares.push([thisSquareX, thisSquareY, widthOfEach, heightOfEach]);
+        thisSquareY += heightOfEach + spaceBetween;
+      }
+      thisSquareX += widthOfEach + spaceBetween;
+      thisSquareY = tly;
+    }
+  }
+
+  canvas.addEventListener("mousedown", doMouseDown, false);
+
+  function doMouseDown(event) {
+    clickX = event.pageX;
+    clickY = event.pageY;
+    theSquare = whichSquareClicked(clickX, clickY);
+    if (theSquare !== undefined) {
+      drawSquare(theSquare[0], theSquare[1], theSquare[2], theSquare[3], "red")
+    }
+  }
+
+  function whichSquareClicked(clickX, clickY) {
+    var clickedSquare;
+    squares.forEach(function(square) {
+      if (clickX > square[0] && clickY > square[1] && clickX < square[0] + square[2] && clickY < square[1] + square[3]) {
+        clickedSquare = square;
+      }
+    })
+    return clickedSquare;
+  }
+
+  function drawSquare(tlx, tly, brx, bry, color) {
+    ctx.beginPath();
+    ctx.rect(tlx, tly, brx, bry);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.closePath();
+  }
+  drawGrid(50, 50, 300, 300)
+
+</script>
