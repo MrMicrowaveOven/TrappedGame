@@ -22,19 +22,21 @@ Grid.prototype.drawSquare = function(tlx, tly, brx, bry, color) {
     this.ctx.closePath();
   };
 
+Grid.prototype.fillSquare = function (value) {
+  
+};
+
 Grid.prototype.drawGrid = function(tlx, tly, brx, bry) {
     var widthOfEach = (brx - tlx)/this.gridX - this.spaceBetween;
     var heightOfEach = (bry - tly)/this.gridY - this.spaceBetween;
-    console.log(widthOfEach);
-    console.log(heightOfEach);
+
     var thisSquareX = tlx;
     var thisSquareY = tly;
     for (var i = 0; i < this.gridX; i++) {
       for (var j = 0; j < this.gridY; j++) {
-        this.drawSquare(thisSquareX, thisSquareY,
-          widthOfEach, heightOfEach, "#0095DD");
-        this.squares.push([thisSquareX, thisSquareY,
-          widthOfEach, heightOfEach, [i,j]]);
+        this.drawSquare(thisSquareX, thisSquareY, widthOfEach, heightOfEach, "#0095DD");
+        this.squares.push([
+          thisSquareX, thisSquareY, widthOfEach, heightOfEach, [i,j]]);
         thisSquareY += heightOfEach + this.spaceBetween;
       }
       thisSquareX += widthOfEach + this.spaceBetween;

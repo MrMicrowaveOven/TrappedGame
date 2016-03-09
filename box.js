@@ -9,11 +9,11 @@ function Box(id, bottom) {
   this.boxStartY = -40;
   this.heightOfBox = 60;
   this.widthOfBox = 140;
-  this.fallSpeed = 2;
+  this.fallSpeed = 5;
   this.boxesQueue = [];
 
-  this.firstNum = Math.floor(Math.random() * 100);
-  this.secondNum = Math.floor(Math.random() * 100);
+  this.firstNum = Math.floor(Math.random() * 10);
+  this.secondNum = Math.floor(Math.random() * 10);
   this.totalNum = this.firstNum + this.secondNum;
 
   this.borderWidth = "2";
@@ -56,18 +56,18 @@ Box.prototype.drawBox = function(tlx, tly, brx, bry, color) {
 
 Box.prototype.reduceSpeed = function(killKey) {
 
-    if (this.boxStartY === this.pathLength / 2) {
-      this.fallSpeed = this.fallSpeed/2;
-    }
-    // if (this.boxStartY === 2*this.pathLength / 3) {
+    // if (this.boxStartY === this.pathLength / 2) {
     //   this.fallSpeed = this.fallSpeed/2;
     // }
-    if (this.boxStartY === this.pathLength * 3 / 4) {
-      this.fallSpeed = this.fallSpeed/2;
-    }
-    if (this.boxStartY === this.pathLength * 7 / 8) {
-      this.fallSpeed = this.fallSpeed/2;
-    }
+    // // if (this.boxStartY === 2*this.pathLength / 3) {
+    // //   this.fallSpeed = this.fallSpeed/2;
+    // // }
+    // if (this.boxStartY === this.pathLength * 3 / 4) {
+    //   this.fallSpeed = this.fallSpeed/2;
+    // }
+    // if (this.boxStartY === this.pathLength * 7 / 8) {
+    //   this.fallSpeed = this.fallSpeed/2;
+    // }
     if (this.boxStartY === this.pathLength) {
       this.fallSpeed = 0;
       this.doneMoving = true;
@@ -88,9 +88,9 @@ Box.prototype.reduceSpeed = function(killKey) {
 Box.prototype.dropBox = function (killKey) {
   this.ctx.clearRect(
     this.boxStartX - 1,
-    this.boxStartY - 3,
+    this.boxStartY - 7,
     this.widthOfBox + 2,
-    this.heightOfBox
+    this.heightOfBox + 4
   );
   // this.drawBox(
   //   this.boxStartX - this.borderWidth - 1,
@@ -105,8 +105,5 @@ Box.prototype.dropBox = function (killKey) {
   this.reduceSpeed(killKey);
 };
 
-Box.prototype.removeBox = function () {
-  var placed = allBoxes.shift;
-};
 
 // window.box = Box;

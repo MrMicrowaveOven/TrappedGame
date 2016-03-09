@@ -61,23 +61,59 @@
   canvas.addEventListener("mousedown", doMouseDown, false);
 
   function doMouseDown(event) {
-    // dropOneBox(box2);
-    clickX = event.pageX;
-    clickY = event.pageY;
+
+
+    clickX = event.pageX - canvas.offsetLeft;
+    clickY = event.pageY - canvas.offsetTop;
+
+
+
     if (clickX > gridX && clickY > gridY && clickX < gridX + gridWidth && clickY < gridY + gridHeight) {
       theSquare = whichSquareClicked(clickX, clickY);
       if (theSquare !== undefined) {
+
+        ctx.font = "20px Arial";
+        ctx.textAlign = "center";
+
+        var tileFill = boxValue;
+
         grid.drawSquare(theSquare[0], theSquare[1], theSquare[2], theSquare[3], "red")
+        ctx.fillStyle = "black";
+        ctx.fillText(tileFill, theSquare[0]+theSquare[2]/2, theSquare[1]+theSquare[3]/2);
+
       }
     }
   }
+
+  function removeBox(){
+    //Clear previous boxes
+    allBoxes.forEach(function(box) {
+      ctx.clearRect(
+        box.boxStartX - 1,
+        box.boxStartY - 7,
+        box.widthOfBox + 2,
+        box.heightOfBox + 8
+      );
+    });
+    //Remove the one box from the queue
+    var placed = allBoxes.shift();
+
+    //Restack boxes
+    allBoxes.forEach(function(box) {
+      box.boxStartY += box.heightOfBox;
+      box.drawBox(box.boxStartX, box.boxStartY,
+        box.widthOfBox, box.heightOfBox, "red");
+    });
+    return placed.totalNum;
+  };
+
 
   function whichSquareClicked(clickX, clickY) {
     var clickedSquare;
     grid.squares.forEach(function(square) {
       if (clickX > square[0] && clickY > square[1] && clickX < square[0] + square[2] && clickY < square[1] + square[3]) {
         clickedSquare = square;
-        box.removeBox;
+        boxValue = removeBox();
       }
     })
     return clickedSquare;
