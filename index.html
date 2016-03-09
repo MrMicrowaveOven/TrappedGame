@@ -2,10 +2,15 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <script type="text/javascript" src='./grid.js'>
+    </script>
+    <script type="text/javascript" src='./box.js'>
+    </script>
+
     <title>Trapped</title>
     <style>
     	* { padding: 0; margin: 0; }
-    	canvas { background: #eee; display: block; margin: 0 auto; }
+    	canvas { background:url(lab.jpg); background-size: 100% 100%; display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
@@ -18,60 +23,63 @@
   var canvas = document.getElementById("myCanvas");
   var ctx = canvas.getContext("2d");
 
-  var gridX = 5;
-  var gridY = 5;
-  var squares = [];
-
   var clickX;
   var clickY;
   var theSquare;
 
-  var spaceBetween = 5;
+  var grid = new Grid();
+  var box = new Box();
+  var allBoxes = [];
 
-  function drawGrid(tlx, tly, brx, bry) {
-    var widthOfEach = (brx - tlx)/gridX - spaceBetween;
-    var heightOfEach = (bry - tly)/gridY - spaceBetween;
-    var thisSquareX = tlx;
-    var thisSquareY = tly;
-    for (var i = 0; i < gridX; i++) {
-      for (var j = 0; j < gridY; j++) {
-        drawSquare(thisSquareX, thisSquareY, widthOfEach, heightOfEach, "#0095DD");
-        squares.push([thisSquareX, thisSquareY, widthOfEach, heightOfEach]);
-        thisSquareY += heightOfEach + spaceBetween;
-      }
-      thisSquareX += widthOfEach + spaceBetween;
-      thisSquareY = tly;
-    }
+  allBoxes.push(box);
+  // var box2 = new Box();
+
+  // function draw() {
+  //   box.dropBox();
+  // }
+
+  function dropOneBox(thebox) {
+    killKey = setInterval(function(){
+      dropping(thebox, killKey)
+    } , 10);
+  };
+
+  function dropping(whichbox, killKey) {
+    whichbox.dropBox(killKey);
   }
+
+  dropOneBox(box);
+
+  var gridX = 50;
+  var gridY = 50;
+  var gridWidth = 400;
+  var gridHeight = 400;
+
+  grid.drawGrid(gridX, gridY, gridWidth, gridHeight);
+  // setInterval(draw, 10);
 
   canvas.addEventListener("mousedown", doMouseDown, false);
 
   function doMouseDown(event) {
+    // dropOneBox(box2);
     clickX = event.pageX;
     clickY = event.pageY;
-    theSquare = whichSquareClicked(clickX, clickY);
-    if (theSquare !== undefined) {
-      drawSquare(theSquare[0], theSquare[1], theSquare[2], theSquare[3], "red")
+    if (clickX > gridX && clickY > gridY && clickX < gridX + gridWidth && clickY < gridY + gridHeight) {
+      theSquare = whichSquareClicked(clickX, clickY);
+      if (theSquare !== undefined) {
+        grid.drawSquare(theSquare[0], theSquare[1], theSquare[2], theSquare[3], "red")
+      }
     }
   }
 
   function whichSquareClicked(clickX, clickY) {
     var clickedSquare;
-    squares.forEach(function(square) {
+    grid.squares.forEach(function(square) {
       if (clickX > square[0] && clickY > square[1] && clickX < square[0] + square[2] && clickY < square[1] + square[3]) {
         clickedSquare = square;
+        box.removeBox;
       }
     })
     return clickedSquare;
   }
-
-  function drawSquare(tlx, tly, brx, bry, color) {
-    ctx.beginPath();
-    ctx.rect(tlx, tly, brx, bry);
-    ctx.fillStyle = color;
-    ctx.fill();
-    ctx.closePath();
-  }
-  drawGrid(50, 50, 300, 300)
-
 </script>
