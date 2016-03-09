@@ -39,7 +39,7 @@ Box.prototype.drawBox = function(tlx, tly, brx, bry, color) {
   this.ctx.closePath();
 
 // Set font
-  this.ctx.fillStyle = "black";
+  this.ctx.fillStyle = boxBorderColor;
   this.ctx.font = "20px Arial";
   ctx.textAlign = "center";
 
@@ -49,7 +49,7 @@ Box.prototype.drawBox = function(tlx, tly, brx, bry, color) {
   this.ctx.beginPath();
   this.ctx.rect(tlx, tly, brx, bry);
   this.ctx.lineWidth = this.borderWidth;
-  this.ctx.strokeStyle = "black";
+  this.ctx.strokeStyle = boxBorderColor;
   this.ctx.stroke();
   this.ctx.closePath();
 };
@@ -100,7 +100,7 @@ Box.prototype.dropBox = function (killKey) {
   // );
 
   this.drawBox(this.boxStartX, this.boxStartY,
-    this.widthOfBox, this.heightOfBox, "red");
+    this.widthOfBox, this.heightOfBox, filledTileColor);
   this.boxStartY += this.fallSpeed;
   this.reduceSpeed(killKey);
 };
