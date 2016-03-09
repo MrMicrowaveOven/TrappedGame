@@ -25,7 +25,7 @@
 
   var clickX;
   var clickY;
-  var theSquare;
+  var thetile;
 
   var grid = new Grid();
   var box = new Box();
@@ -74,16 +74,16 @@
 
 
     if (clickX > gridX && clickY > gridY && clickX < gridX + gridWidth && clickY < gridY + gridHeight) {
-      theSquare = whichSquareClicked(clickX, clickY);
-      if (theSquare !== undefined) {
+      thetile = whichtileClicked(clickX, clickY);
+      if (thetile !== undefined) {
 
         ctx.font = "20px Arial";
         ctx.textAlign = "center";
         var tileFill = boxValue;
 
-        grid.drawSquare(theSquare[0], theSquare[1], theSquare[2], theSquare[3], "red")
+        grid.drawtile(thetile[0], thetile[1], thetile[2], thetile[3], "red")
         ctx.fillStyle = "black";
-        ctx.fillText(tileFill, theSquare[0]+theSquare[2]/2, theSquare[1]+theSquare[3]/2);
+        ctx.fillText(tileFill, thetile[0]+thetile[2]/2, thetile[1]+thetile[3]/2);
 
       }
     }
@@ -112,14 +112,14 @@
   };
 
 
-  function whichSquareClicked(clickX, clickY) {
-    var clickedSquare;
-    grid.squares.forEach(function(square) {
-      if (clickX > square[0] && clickY > square[1] && clickX < square[0] + square[2] && clickY < square[1] + square[3]) {
-        clickedSquare = square;
+  function whichtileClicked(clickX, clickY) {
+    var clickedtile;
+    grid.tiles.forEach(function(tile) {
+      if (clickX > tile[0] && clickY > tile[1] && clickX < tile[0] + tile[2] && clickY < tile[1] + tile[3]) {
+        clickedtile = tile;
         boxValue = removeBox();
       }
     })
-    return clickedSquare;
+    return clickedtile;
   }
 </script>

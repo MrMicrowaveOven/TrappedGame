@@ -1,12 +1,12 @@
 function Grid() {
   this.gridX = 5;
   this.gridY = 5;
-  this.squares = [];
+  this.tiles = [];
   this.spaceBetween = 5;
   this.ctx = canvas.getContext("2d");
 
 }
-Grid.prototype.drawSquare = function(tlx, tly, brx, bry, color) {
+Grid.prototype.drawtile = function(tlx, tly, brx, bry, color) {
     this.ctx.beginPath();
     this.ctx.rect(tlx, tly, brx, bry);
     this.ctx.fillStyle = color;
@@ -22,7 +22,7 @@ Grid.prototype.drawSquare = function(tlx, tly, brx, bry, color) {
     this.ctx.closePath();
   };
 
-Grid.prototype.fillSquare = function (value) {
+Grid.prototype.filltile = function (value) {
 
 };
 
@@ -30,16 +30,16 @@ Grid.prototype.drawGrid = function(tlx, tly, brx, bry) {
     var widthOfEach = (brx - tlx)/this.gridX - this.spaceBetween;
     var heightOfEach = (bry - tly)/this.gridY - this.spaceBetween;
 
-    var thisSquareX = tlx;
-    var thisSquareY = tly;
+    var thistileX = tlx;
+    var thistileY = tly;
     for (var i = 0; i < this.gridX; i++) {
       for (var j = 0; j < this.gridY; j++) {
-        this.drawSquare(thisSquareX, thisSquareY, widthOfEach, heightOfEach, emptyTileColor);
-        this.squares.push([
-          thisSquareX, thisSquareY, widthOfEach, heightOfEach, [i,j]]);
-        thisSquareY += heightOfEach + this.spaceBetween;
+        this.drawtile(thistileX, thistileY, widthOfEach, heightOfEach, emptyTileColor);
+        this.tiles.push([
+          thistileX, thistileY, widthOfEach, heightOfEach, [i,j]]);
+        thistileY += heightOfEach + this.spaceBetween;
       }
-      thisSquareX += widthOfEach + this.spaceBetween;
-      thisSquareY = tly;
+      thistileX += widthOfEach + this.spaceBetween;
+      thistileY = tly;
     }
   };
