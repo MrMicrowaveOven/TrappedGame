@@ -15,9 +15,9 @@ Well.prototype.dropABox = function () {
 
   var bottom = 400 - this.boxes.length * heightOfBoxes;
   this.boxCount += 1;
-  // debugger;
+  // if (this.boxCount % 5 === 0) {fallSpeed = fallSpeed+1};
+
   this.fallingBox = new Box(this.boxCount, bottom);
-  // debugger;
   this.killKey = setInterval(this.dropping.bind(this), 10);
 };
 
