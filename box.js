@@ -88,7 +88,7 @@ Box.prototype.reduceSpeed = function() {
       } else {
           clearInterval(well.killKey);
           well.boxes.push(well.fallingBox);
-          // alert("GAME OVER");
+          gameOver();
           // document.location.reload();
       }
     }

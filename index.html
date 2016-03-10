@@ -26,7 +26,10 @@
 // Canvas
   var canvas = document.getElementById("myCanvas");
   var ctx = canvas.getContext("2d");
+  canvas.addEventListener("mousedown", doMouseDown, false);
 
+
+  var playing = false;
   var clickX;
   var clickY;
   //Tile that was just clicked
@@ -45,43 +48,51 @@
   var boxColor = "red";
   var tileRemovalColor= "yellow";
 
-
-  // function dropOneBox(thebox) {
-  //   killKey = setInterval(function(){
-  //     dropping(thebox, killKey)
-  //   } , 10);
-  // };
-  //
-  // function dropping(whichbox, killKey) {
-  //   well.dropABox(killKey);
-  // }
-
-  // dropOneBox(box);
-
   var gridX = 50;
   var gridY = 50;
   var gridWidth = 400;
   var gridHeight = 400;
 
-  grid.drawGrid(gridX, gridY, gridWidth, gridHeight);
 
-  well.dropABox();
+  ctx.beginPath();
+  ctx.rect(50, 50, 400, 300);
+  ctx.fillStyle = "grey";
+  ctx.fill();
+  ctx.closePath();
 
-  canvas.addEventListener("mousedown", doMouseDown, false);
+  ctx.font = "20px Arial";
+  ctx.textAlign = "center";
+  ctx.fillStyle = "black";
+  var title = "Hello!  Welcome to Trapped!"
+  var title2 = "Click the red square to start playing!"
+  ctx.fillText(title, 230, 150);
+  ctx.fillText(title2, 230, 175);
+
+  ctx.beginPath();
+  ctx.rect(230, 230, 50, 50);
+  ctx.fillStyle = "red";
+  ctx.fill();
+  ctx.closePath();
+
+  function play() {
+    playing = true;
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    grid.drawGrid(gridX, gridY, gridWidth, gridHeight);
+    well.dropABox();
+  }
 
   function doMouseDown(event) {
-
-
     clickX = event.pageX - canvas.offsetLeft;
     clickY = event.pageY - canvas.offsetTop;
-
-    if (clickX > gridX && clickY > gridY && clickX < gridX + gridWidth && clickY < gridY + gridHeight) {
+    if (playing === true && clickX > gridX && clickY > gridY && clickX < gridX + gridWidth && clickY < gridY + gridHeight) {
       thetile = whichtileClicked(clickX, clickY);
       if (thetile !== undefined) {
         boxValue = well.removeABox();
         thetile.changeValue(boxValue);
         grid.checkForRemovals(thetile);
       }
+    } else if (playing === false && clickX > 230 && clickX < 280 && clickY > 230 && clickY < 280) {
+        play();
     }
   }
 
@@ -95,4 +106,32 @@
     })
     return clickedtile;
   }
+
+
+  function gameOver() {
+    // playing = false;
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+
+    ctx.beginPath();
+    ctx.rect(0,0,canvas.width, canvas.height);
+    ctx.fillStyle = "black";
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.font = "20px Arial";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "white";
+    var title = "Game over!"
+    // var title2 = "Click the red square to play again!"
+    ctx.fillText(title, 230, 150);
+    // ctx.fillText(title2, 230, 175);
+
+    // ctx.beginPath();
+    // ctx.rect(230, 230, 50, 50);
+    // ctx.fillStyle = "red";
+    // ctx.fill();
+    // ctx.closePath();
+
+  }
+
 </script>
