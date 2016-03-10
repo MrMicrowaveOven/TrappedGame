@@ -64,10 +64,10 @@ Box.prototype.clearSelf = function () {
 };
 
 Box.prototype.reduceSpeed = function() {
-
-    // if (this.boxStartY === this.pathLength / 2) {
-    //   this.fallSpeed = this.fallSpeed/2;
-    // }
+    this.pathLength = this.pathBottom - this.pathTop;
+    if (this.boxY === this.pathBottom / 2) {
+      this.fallSpeed = this.fallSpeed/2;
+    }
     // // if (this.boxStartY === 2*this.pathLength / 3) {
     // //   this.fallSpeed = this.fallSpeed/2;
     // // }
