@@ -16,26 +16,50 @@ function Tile(x, y, width, height, row, column) {
 }
 
 Tile.prototype.changeValue = function (val) {
+  this.filled = true;
   this.value = val;
   this.color = filledTileColor;
 
+  //Tile
   this.ctx.beginPath();
   this.ctx.rect(this.x, this.y, this.width, this.height);
   this.ctx.fillStyle = this.color;
   this.ctx.fill();
   this.ctx.closePath();
 
+  //Text Inside Tile
+  this.ctx.font = "20px Arial";
+  this.ctx.textAlign = "center";
+  this.ctx.fillStyle = "black";
+  this.ctx.fillText(this.value, this.x+this.width/2, this.y+this.height/2);
+};
+
+Tile.prototype.flashRemoval = function () {
+  this.color = tileRemovalColor;
+
+  //Tile
   this.ctx.beginPath();
-  this.ctx.rect(this.x - grid.spaceBetween/2, this.y - grid.spaceBetween/2,
-    this.width + grid.spaceBetween, this.height + grid.spaceBetween);
-  this.ctx.lineWidth="5";
-  this.ctx.strokeStyle = gridBorderColor;
-  this.ctx.stroke();
+  this.ctx.rect(this.x, this.y, this.width, this.height);
+  this.ctx.fillStyle = this.color;
+  this.ctx.fill();
   this.ctx.closePath();
+
+  //Text Inside Tile
+  this.ctx.font = "20px Arial";
+  this.ctx.textAlign = "center";
+  this.ctx.fillStyle = "red";
+  this.ctx.fillText(this.value, this.x+this.width/2, this.y+this.height/2);
+  // this.drawEmptyTile();
+  var self = this;
+  setTimeout(function(){
+      self.drawEmptyTile();
+    }
+    , 500);
 
 };
 
 Tile.prototype.drawEmptyTile = function () {
+  this.filled = false;
   this.value = "";
   this.color = emptyTileColor;
 
@@ -53,21 +77,4 @@ Tile.prototype.drawEmptyTile = function () {
   this.ctx.stroke();
   this.ctx.closePath();
 
-};
-
-Tile.prototype.drawTile = function () {
-  // this.ctx.beginPath();
-  // this.ctx.rect(this.x, this.y, this.width, this.height);
-  // this.ctx.fillStyle = this.color;
-  // this.ctx.fill();
-  // this.ctx.closePath();
-  //
-  // //
-  // this.ctx.beginPath();
-  // this.ctx.rect(this.x-grid.spaceBetween/2, this.y-grid.spaceBetween/2,
-  //   this.width+grid.spaceBetween, this.height+grid.spaceBetween);
-  // this.ctx.lineWidth="5";
-  // this.ctx.strokeStyle = boxBorderColor;
-  // this.ctx.stroke();
-  // this.ctx.closePath();
 };

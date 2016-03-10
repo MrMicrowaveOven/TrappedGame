@@ -9,11 +9,11 @@ function Box(id, bottom) {
   this.boxStartY = -40;
   this.heightOfBox = 60;
   this.widthOfBox = 140;
-  this.fallSpeed = 5;
+  this.fallSpeed = 1;
   this.boxesQueue = [];
 
-  this.firstNum = Math.floor(Math.random() * 10);
-  this.secondNum = Math.floor(Math.random() * 10);
+  this.firstNum = Math.floor(Math.random() * 3);
+  this.secondNum = Math.floor(Math.random() * 3);
   this.totalNum = this.firstNum + this.secondNum;
 
   this.borderWidth = "2";

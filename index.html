@@ -6,6 +6,8 @@
     </script>
     <script type="text/javascript" src='./box.js'>
     </script>
+    <script type="text/javascript" src='./tile.js'>
+    </script>
 
     <title>Trapped</title>
     <style>
@@ -35,13 +37,9 @@
   var filledTileColor = "red";
   var gridBorderColor = "black";
   var boxBorderColor = "black";
+  var tileRemovalColor= "yellow";
 
   allBoxes.push(box);
-  // var box2 = new Box();
-
-  // function draw() {
-  //   box.dropBox();
-  // }
 
   function dropOneBox(thebox) {
     killKey = setInterval(function(){
@@ -61,7 +59,6 @@
   var gridHeight = 400;
 
   grid.drawGrid(gridX, gridY, gridWidth, gridHeight);
-  // setInterval(draw, 10);
 
   canvas.addEventListener("mousedown", doMouseDown, false);
 
@@ -76,18 +73,12 @@
     if (clickX > gridX && clickY > gridY && clickX < gridX + gridWidth && clickY < gridY + gridHeight) {
       thetile = whichtileClicked(clickX, clickY);
       if (thetile !== undefined) {
-
-        ctx.font = "20px Arial";
-        ctx.textAlign = "center";
-        var tileFill = boxValue;
-
-        grid.drawtile(thetile[0], thetile[1], thetile[2], thetile[3], "red")
-        ctx.fillStyle = "black";
-        ctx.fillText(tileFill, thetile[0]+thetile[2]/2, thetile[1]+thetile[3]/2);
-
+        thetile.changeValue(boxValue);
+        grid.checkForRemovals(thetile);
       }
     }
   }
+
 
   function removeBox(){
     //Clear previous boxes
@@ -115,7 +106,7 @@
   function whichtileClicked(clickX, clickY) {
     var clickedtile;
     grid.tiles.forEach(function(tile) {
-      if (clickX > tile[0] && clickY > tile[1] && clickX < tile[0] + tile[2] && clickY < tile[1] + tile[3]) {
+      if (!tile.filled && clickX > tile.x && clickY > tile.y && clickX < tile.x + tile.width && clickY < tile.y + tile.height) {
         clickedtile = tile;
         boxValue = removeBox();
       }

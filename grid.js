@@ -6,40 +6,69 @@ function Grid() {
   this.ctx = canvas.getContext("2d");
 
 }
-Grid.prototype.drawtile = function(tlx, tly, brx, bry, color) {
-    this.ctx.beginPath();
-    this.ctx.rect(tlx, tly, brx, bry);
-    this.ctx.fillStyle = color;
-    this.ctx.fill();
-    this.ctx.closePath();
 
-    this.ctx.beginPath();
-    this.ctx.rect(tlx-this.spaceBetween/2, tly-this.spaceBetween/2,
-      brx+this.spaceBetween, bry+this.spaceBetween);
-    this.ctx.lineWidth="5";
-    this.ctx.strokeStyle = gridBorderColor;
-    this.ctx.stroke();
-    this.ctx.closePath();
-  };
-
-Grid.prototype.filltile = function (value) {
-
-};
 
 Grid.prototype.drawGrid = function(tlx, tly, brx, bry) {
-    var widthOfEach = (brx - tlx)/this.gridX - this.spaceBetween;
-    var heightOfEach = (bry - tly)/this.gridY - this.spaceBetween;
+  var widthOfEach = (brx - tlx)/this.gridX - this.spaceBetween;
+  var heightOfEach = (bry - tly)/this.gridY - this.spaceBetween;
 
-    var thistileX = tlx;
-    var thistileY = tly;
-    for (var i = 0; i < this.gridX; i++) {
-      for (var j = 0; j < this.gridY; j++) {
-        this.drawtile(thistileX, thistileY, widthOfEach, heightOfEach, emptyTileColor);
-        this.tiles.push([
-          thistileX, thistileY, widthOfEach, heightOfEach, [i,j]]);
-        thistileY += heightOfEach + this.spaceBetween;
-      }
-      thistileX += widthOfEach + this.spaceBetween;
-      thistileY = tly;
+  var tile;
+  var thistileX = tlx;
+  var thistileY = tly;
+  for (var i = 0; i < this.gridX; i++) {
+    for (var j = 0; j < this.gridY; j++) {
+      tile = new Tile(thistileX, thistileY, widthOfEach, heightOfEach, i, j)
+      tile.drawEmptyTile();
+      this.tiles.push(tile);
+      thistileY += heightOfEach + this.spaceBetween;
     }
-  };
+    thistileX += widthOfEach + this.spaceBetween;
+    thistileY = tly;
+  }
+};
+
+Grid.prototype.checkForRemovals = function (centerTile) {
+
+  var adjacentTiles = this.getAdjacentTiles(centerTile);
+
+  var removeTheseTiles = this.tilesToRemove(centerTile, adjacentTiles);
+  //Remove Tiles
+  this.removeTiles(removeTheseTiles);
+};
+
+Grid.prototype.tilesToRemove = function (centerTile, adjacentTiles) {
+  //Decide which tiles to remove
+  var removeTheseTiles = [];
+  adjacentTiles.forEach(function(tile) {
+    if (tile.value === centerTile.value) {
+      removeTheseTiles.push(tile);
+    }
+  });
+  if (removeTheseTiles.length > 0) {
+    removeTheseTiles.push(centerTile);
+  }
+  return removeTheseTiles;
+};
+
+Grid.prototype.removeTiles = function (removeTheseTiles) {
+  removeTheseTiles.forEach(function(tile) {
+    tile.flashRemoval();
+  });
+};
+
+Grid.prototype.getAdjacentTiles = function (centerTile) {
+  var adjacentTiles = [];
+  //getAdjacentTiles
+  this.tiles.forEach(function(tile){
+    if (tile.row === centerTile.row) {
+      if (tile.column === centerTile.column + 1 || tile.column === centerTile.column - 1) {
+        adjacentTiles.push(tile);
+      }
+    } else if (tile.column === centerTile.column) {
+      if (tile.row === centerTile.row + 1 || tile.row === centerTile.row - 1) {
+        adjacentTiles.push(tile);
+      }
+    }
+  });
+  return adjacentTiles;
+};
