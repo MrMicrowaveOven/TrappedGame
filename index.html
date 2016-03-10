@@ -78,6 +78,7 @@
     if (clickX > gridX && clickY > gridY && clickX < gridX + gridWidth && clickY < gridY + gridHeight) {
       thetile = whichtileClicked(clickX, clickY);
       if (thetile !== undefined) {
+        boxValue = well.removeABox();
         thetile.changeValue(boxValue);
         grid.checkForRemovals(thetile);
       }
@@ -90,7 +91,6 @@
     grid.tiles.forEach(function(tile) {
       if (!tile.filled && clickX > tile.x && clickY > tile.y && clickX < tile.x + tile.width && clickY < tile.y + tile.height) {
         clickedtile = tile;
-        boxValue = well.removeABox();
       }
     })
     return clickedtile;

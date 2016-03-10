@@ -13,8 +13,8 @@ function Box(id, bottom) {
   this.color = boxColor;
   this.borderColor = boxBorderColor;
 
-  this.firstNum = Math.floor(Math.random() * 3);
-  this.secondNum = Math.floor(Math.random() * 3);
+  this.firstNum = Math.floor(Math.random() * 10);
+  this.secondNum = Math.floor(Math.random() * 10);
   this.totalNum = this.firstNum + this.secondNum;
 
   this.borderWidth = "2";
@@ -94,7 +94,7 @@ Box.prototype.reduceSpeed = function() {
     }
 };
 
-Box.prototype.dropBox = function (killKey) {
+Box.prototype.dropBox = function () {
   this.ctx.clearRect(
     this.boxX - 1,
     this.boxY - 7,

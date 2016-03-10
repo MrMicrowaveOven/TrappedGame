@@ -17,7 +17,7 @@ Well.prototype.dropABox = function () {
   this.boxCount += 1;
   // debugger;
   this.fallingBox = new Box(this.boxCount, bottom);
-
+  // debugger;
   this.killKey = setInterval(this.dropping.bind(this), 10);
 };
 
@@ -52,8 +52,10 @@ Well.prototype.removeABox = function () {
     //If a falling box was placed
     clearInterval(this.killKey);
     this.fallingBox.clearSelf();
+    var fallValue = this.fallingBox.totalNum;
+    this.fallingBox = "";
     this.dropABox();
     // debugger;
-    return this.fallingBox.totalNum;
+    return fallValue;
   }
 };
