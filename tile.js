@@ -16,6 +16,7 @@ function Tile(x, y, width, height, row, column) {
 }
 
 Tile.prototype.changeValue = function (val) {
+  // debugger;
   this.filled = true;
   this.value = val;
   this.color = filledTileColor;

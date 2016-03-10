@@ -5,12 +5,13 @@ function Box(id, bottom) {
     this.id = 1;
   }
 
-  this.boxStartX = 490;
-  this.boxStartY = -40;
-  this.heightOfBox = 60;
-  this.widthOfBox = 140;
-  this.fallSpeed = 1;
-  this.boxesQueue = [];
+  this.boxX = 490;
+  this.boxY = -40;
+  this.height = heightOfBoxes;
+  this.width = 140;
+  this.fallSpeed = fallSpeed;
+  this.color = boxColor;
+  this.borderColor = boxBorderColor;
 
   this.firstNum = Math.floor(Math.random() * 3);
   this.secondNum = Math.floor(Math.random() * 3);
@@ -20,9 +21,6 @@ function Box(id, bottom) {
 
   this.pathTop = -40;
   this.pathBottom = bottom;
-  if (bottom === undefined) {
-    this.pathBottom = 260;
-  }
   this.pathLength = this.pathBottom - this.pathTop;
   this.doneMoving = false;
 
@@ -31,30 +29,41 @@ function Box(id, bottom) {
 
 }
 
-Box.prototype.drawBox = function(tlx, tly, brx, bry, color) {
+Box.prototype.drawBox = function() {
+//Box fill
   this.ctx.beginPath();
-  this.ctx.rect(tlx, tly, brx, bry);
-  this.ctx.fillStyle = color;
+  this.ctx.rect(this.boxX, this.boxY, this.width, this.height);
+  this.ctx.fillStyle = this.color;
   this.ctx.fill();
   this.ctx.closePath();
 
 // Set font
-  this.ctx.fillStyle = boxBorderColor;
+  this.ctx.fillStyle = this.borderColor;
   this.ctx.font = "20px Arial";
   ctx.textAlign = "center";
 
   var boxfill = this.firstNum + " + " + this.secondNum;
-  this.ctx.fillText(boxfill, this.boxStartX+this.widthOfBox/2, this.boxStartY+this.heightOfBox/2);
+  this.ctx.fillText(boxfill, this.boxX+this.width/2, this.boxY+this.height/2);
 
+//Box border
   this.ctx.beginPath();
-  this.ctx.rect(tlx, tly, brx, bry);
+  this.ctx.rect(this.boxX, this.boxY, this.width, this.height);
   this.ctx.lineWidth = this.borderWidth;
-  this.ctx.strokeStyle = boxBorderColor;
+  this.ctx.strokeStyle = this.borderColor;
   this.ctx.stroke();
   this.ctx.closePath();
 };
 
-Box.prototype.reduceSpeed = function(killKey) {
+Box.prototype.clearSelf = function () {
+  this.ctx.clearRect(
+    this.boxX - 1,
+    this.boxY - 7,
+    this.width + 2,
+    this.height + 4
+  );
+};
+
+Box.prototype.reduceSpeed = function() {
 
     // if (this.boxStartY === this.pathLength / 2) {
     //   this.fallSpeed = this.fallSpeed/2;
@@ -68,17 +77,17 @@ Box.prototype.reduceSpeed = function(killKey) {
     // if (this.boxStartY === this.pathLength * 7 / 8) {
     //   this.fallSpeed = this.fallSpeed/2;
     // }
-    if (this.boxStartY === this.pathLength) {
+    if (this.boxY === this.pathBottom) {
       this.fallSpeed = 0;
       this.doneMoving = true;
       if (this.pathBottom > 60)
       {
-        var box2 = new Box(this.id + 1, this.pathBottom - this.heightOfBox);
-        allBoxes.push(box2);
-        clearInterval(killKey);
-        dropOneBox(box2);
+        // clearInterval(killKey);
+
+        well.dropABox();
       } else {
-          clearInterval(killKey);
+          clearInterval(well.killKey);
+          well.boxes.push(well.fallingBox);
           // alert("GAME OVER");
           // document.location.reload();
       }
@@ -87,10 +96,10 @@ Box.prototype.reduceSpeed = function(killKey) {
 
 Box.prototype.dropBox = function (killKey) {
   this.ctx.clearRect(
-    this.boxStartX - 1,
-    this.boxStartY - 7,
-    this.widthOfBox + 2,
-    this.heightOfBox + 4
+    this.boxX - 1,
+    this.boxY - 7,
+    this.width + 2,
+    this.height + 4
   );
   // this.drawBox(
   //   this.boxStartX - this.borderWidth - 1,
@@ -99,10 +108,9 @@ Box.prototype.dropBox = function (killKey) {
   //   this.heightOfBox + this.borderWidth
   // );
 
-  this.drawBox(this.boxStartX, this.boxStartY,
-    this.widthOfBox, this.heightOfBox, filledTileColor);
-  this.boxStartY += this.fallSpeed;
-  this.reduceSpeed(killKey);
+  this.drawBox();
+  this.boxY += this.fallSpeed;
+  this.reduceSpeed();
 };
 
 

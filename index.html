@@ -8,6 +8,8 @@
     </script>
     <script type="text/javascript" src='./tile.js'>
     </script>
+    <script type="text/javascript" src='./well.js'>
+    </script>
 
     <title>Trapped</title>
     <style>
@@ -27,31 +29,34 @@
 
   var clickX;
   var clickY;
+  //Tile that was just clicked
   var thetile;
 
   var grid = new Grid();
-  var box = new Box();
-  var allBoxes = [];
+  var well = new Well();
+
+  var heightOfBoxes = 60;
+  var fallSpeed = 2;
 
   var emptyTileColor = "darkblue";
   var filledTileColor = "red";
   var gridBorderColor = "black";
   var boxBorderColor = "black";
+  var boxColor = "red";
   var tileRemovalColor= "yellow";
 
-  allBoxes.push(box);
 
-  function dropOneBox(thebox) {
-    killKey = setInterval(function(){
-      dropping(thebox, killKey)
-    } , 10);
-  };
+  // function dropOneBox(thebox) {
+  //   killKey = setInterval(function(){
+  //     dropping(thebox, killKey)
+  //   } , 10);
+  // };
+  //
+  // function dropping(whichbox, killKey) {
+  //   well.dropABox(killKey);
+  // }
 
-  function dropping(whichbox, killKey) {
-    whichbox.dropBox(killKey);
-  }
-
-  dropOneBox(box);
+  // dropOneBox(box);
 
   var gridX = 50;
   var gridY = 50;
@@ -60,6 +65,8 @@
 
   grid.drawGrid(gridX, gridY, gridWidth, gridHeight);
 
+  well.dropABox();
+
   canvas.addEventListener("mousedown", doMouseDown, false);
 
   function doMouseDown(event) {
@@ -67,8 +74,6 @@
 
     clickX = event.pageX - canvas.offsetLeft;
     clickY = event.pageY - canvas.offsetTop;
-
-
 
     if (clickX > gridX && clickY > gridY && clickX < gridX + gridWidth && clickY < gridY + gridHeight) {
       thetile = whichtileClicked(clickX, clickY);
@@ -80,35 +85,12 @@
   }
 
 
-  function removeBox(){
-    //Clear previous boxes
-    allBoxes.forEach(function(box) {
-      ctx.clearRect(
-        box.boxStartX - 1,
-        box.boxStartY - 7,
-        box.widthOfBox + 2,
-        box.heightOfBox + 8
-      );
-    });
-    //Remove the one box from the queue
-    var placed = allBoxes.shift();
-
-    //Restack boxes
-    allBoxes.forEach(function(box) {
-      box.boxStartY += box.heightOfBox;
-      box.drawBox(box.boxStartX, box.boxStartY,
-        box.widthOfBox, box.heightOfBox, "red");
-    });
-    return placed.totalNum;
-  };
-
-
   function whichtileClicked(clickX, clickY) {
     var clickedtile;
     grid.tiles.forEach(function(tile) {
       if (!tile.filled && clickX > tile.x && clickY > tile.y && clickX < tile.x + tile.width && clickY < tile.y + tile.height) {
         clickedtile = tile;
-        boxValue = removeBox();
+        boxValue = well.removeABox();
       }
     })
     return clickedtile;
