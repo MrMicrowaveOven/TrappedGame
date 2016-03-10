@@ -57,7 +57,7 @@ Box.prototype.drawBox = function() {
 Box.prototype.clearSelf = function () {
   this.ctx.clearRect(
     this.boxX - 1,
-    this.boxY - 7,
+    this.boxY - 5,
     this.width + 2,
     this.height + 4
   );
