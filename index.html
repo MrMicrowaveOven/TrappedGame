@@ -18,6 +18,20 @@
     </style>
 </head>
 <body>
+<div display="flex" justify-content="center">
+Welcome to my laboratory!  My name is Professor Buttercup, and I could use some help organizing my tiles.
+<br>
+Go ahead and place the tiles on the grid there, on the left.  But don't fill the grid up too much, or I won't have anywhere else to put my tiles!
+<br>
+So how do you make room for more tiles?  Simple.  If there are ever any two tiles next to each other with the same value (up, down, left, right), BOTH tiles will disappear!
+<br>
+As time goes by the tiles will come faster, so do arrange them carefully.
+<br>
+If you fall too far behind, or if the grid fills up completely, it's game over.
+<br>
+</div>
+<!-- Love birds?  When they find a mate they fly away! -->
+
 
 <canvas id="myCanvas" width="720" height="480"></canvas>
 
@@ -92,6 +106,9 @@
         grid.checkForRemovals(thetile);
       }
     } else if (playing === false && clickX > 230 && clickX < 280 && clickY > 230 && clickY < 280) {
+        playing = true;
+        // var grid = new Grid();
+        // var well = new Well();
         play();
     }
   }
@@ -109,7 +126,7 @@
 
 
   function gameOver() {
-    // playing = false;
+    playing = false;
     ctx.clearRect(0,0,canvas.width, canvas.height);
 
     ctx.beginPath();
@@ -122,15 +139,15 @@
     ctx.textAlign = "center";
     ctx.fillStyle = "white";
     var title = "Game over!"
-    // var title2 = "Click the red square to play again!"
+    var title2 = "Click the red square to play again!"
     ctx.fillText(title, 230, 150);
-    // ctx.fillText(title2, 230, 175);
+    ctx.fillText(title2, 230, 175);
 
-    // ctx.beginPath();
-    // ctx.rect(230, 230, 50, 50);
-    // ctx.fillStyle = "red";
-    // ctx.fill();
-    // ctx.closePath();
+    ctx.beginPath();
+    ctx.rect(230, 230, 50, 50);
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.closePath();
 
   }
 

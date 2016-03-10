@@ -57,9 +57,9 @@ Box.prototype.drawBox = function() {
 Box.prototype.clearSelf = function () {
   this.ctx.clearRect(
     this.boxX - 1,
-    this.boxY - 5,
+    this.boxY - 20,
     this.width + 2,
-    this.height + 4
+    this.height + 19
   );
 };
 
@@ -97,9 +97,9 @@ Box.prototype.reduceSpeed = function() {
 Box.prototype.dropBox = function () {
   this.ctx.clearRect(
     this.boxX - 1,
-    this.boxY - 7,
+    this.boxY - 20,
     this.width + 2,
-    this.height + 4
+    this.height + 17
   );
   // this.drawBox(
   //   this.boxStartX - this.borderWidth - 1,
