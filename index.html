@@ -103,7 +103,7 @@ If you fall too far behind, or if the grid fills up completely, it's game over.
         if (clickX > 230 && clickX < 280 && clickY > 230 && clickY < 280){
           document.location.reload();
         }
-    } else {
+    } else if (playing === false && !gameDone) {
       gamemenu.handleClick(clickX, clickY);
     }
   }
