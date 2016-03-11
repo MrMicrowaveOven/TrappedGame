@@ -13,9 +13,23 @@ function Box(id, bottom) {
   this.color = boxColor;
   this.borderColor = boxBorderColor;
 
-  this.firstNum = Math.floor(Math.random() * 10);
-  this.secondNum = Math.floor(Math.random() * 10);
-  this.totalNum = this.firstNum + this.secondNum;
+// Setting game type
+  if (gameType === "addition"){
+    // this.firstNum = Math.floor(Math.random() * 10);
+    var firstNum = ADDITION.num1[Math.floor(Math.random() * ADDITION.num1.length)];
+    // this.secondNum = Math.floor(Math.random() * 10);
+    var secondNum = ADDITION.num2[Math.floor(Math.random() * ADDITION.num2.length)];
+    var totalNum = firstNum + secondNum;
+    this.boxfill = firstNum + " + " + secondNum;
+    this.boxAnswer = totalNum;
+  }
+
+  if (gameType === "elements"){
+    var sampleSize = Object.keys(ELEMENTS).length;
+    this.boxfill =
+      Object.keys(ELEMENTS)[Math.floor(Math.random() * sampleSize)];
+    this.boxAnswer = ELEMENTS[this.boxfill];
+  }
 
   this.borderWidth = "2";
 
@@ -42,7 +56,7 @@ Box.prototype.drawBox = function() {
   this.ctx.font = "20px Arial";
   ctx.textAlign = "center";
 
-  var boxfill = this.firstNum + " + " + this.secondNum;
+  var boxfill = this.boxfill;
   this.ctx.fillText(boxfill, this.boxX+this.width/2, this.boxY+this.height/2);
 
 //Box border
@@ -59,7 +73,7 @@ Box.prototype.clearSelf = function () {
     this.boxX - 1,
     this.boxY - 20,
     this.width + 2,
-    this.height + 19
+    this.height + 20
   );
 };
 

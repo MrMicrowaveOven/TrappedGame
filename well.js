@@ -47,12 +47,13 @@ Well.prototype.removeABox = function () {
       box.boxY += box.height;
       box.drawBox();
     });
-    return placed.totalNum;
+    // debugger;
+    return placed.boxAnswer;
   } else {
     //If a falling box was placed
     clearInterval(this.killKey);
     this.fallingBox.clearSelf();
-    var fallValue = this.fallingBox.totalNum;
+    var fallValue = this.fallingBox.boxAnswer;
     this.fallingBox = "";
     this.dropABox();
     // debugger;
