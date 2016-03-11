@@ -6,13 +6,13 @@ function GameMenu(){
   this.textCenter = this.canvas.width/2;
 
   this.playMathButtonX = 190;
-  this.playMathButtonY = 230;
+  this.playMathButtonY = 260;
   this.playMathButtonWidth = 140;
   this.playMathButtonHeight = 50;
   // this.playMathButtonXCenter =
 
   this.playElementsButtonX = 420;
-  this.playElementsButtonY = 230;
+  this.playElementsButtonY = 260;
   this.playElementsButtonWidth = 160;
   this.playElementsButtonHeight = 50;
 
@@ -51,9 +51,11 @@ GameMenu.prototype.render = function () {
   this.ctx.textAlign = "center";
   this.ctx.fillStyle = "black";
   var title = "Hello!  Welcome to Trapped!";
-  var title2 = "What would you like to study?  Addition or Elements?";
+  var title2 = "This is a game for learning useful things."
+  var title3 = "What would you like to study?  Addition or Elements?";
   this.ctx.fillText(title, this.textCenter, 150);
   this.ctx.fillText(title2, this.textCenter, 190);
+  this.ctx.fillText(title3, this.textCenter, 230);
 
 // Play Math Button
   this.ctx.beginPath();
