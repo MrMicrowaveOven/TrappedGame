@@ -53,11 +53,11 @@ Box.prototype.drawBox = function() {
 
 // Set font
   this.ctx.fillStyle = this.borderColor;
-  this.ctx.font = "20px Arial";
+  this.ctx.font = "26px Arial";
   ctx.textAlign = "center";
 
   var boxfill = this.boxfill;
-  this.ctx.fillText(boxfill, this.boxX+this.width/2, this.boxY+this.height/2);
+  this.ctx.fillText(boxfill, this.boxX+this.width/2, this.boxY+this.height/2 + 5);
 
 //Box border
   this.ctx.beginPath();
@@ -79,9 +79,9 @@ Box.prototype.clearSelf = function () {
 
 Box.prototype.reduceSpeed = function() {
     this.pathLength = this.pathBottom - this.pathTop;
-    if (this.boxY === this.pathBottom / 2) {
-      this.fallSpeed = this.fallSpeed/2;
-    }
+    // if (this.boxY === this.pathBottom / 2) {
+    //   this.fallSpeed = this.fallSpeed/2;
+    // }
     // // if (this.boxStartY === 2*this.pathLength / 3) {
     // //   this.fallSpeed = this.fallSpeed/2;
     // // }
@@ -91,7 +91,7 @@ Box.prototype.reduceSpeed = function() {
     // if (this.boxStartY === this.pathLength * 7 / 8) {
     //   this.fallSpeed = this.fallSpeed/2;
     // }
-    if (this.boxY === this.pathBottom) {
+    if (this.boxY >= this.pathBottom) {
       this.fallSpeed = 0;
       this.doneMoving = true;
       if (this.pathBottom > 60)

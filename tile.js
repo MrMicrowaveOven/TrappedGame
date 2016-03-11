@@ -29,10 +29,10 @@ Tile.prototype.changeValue = function (val) {
   this.ctx.closePath();
 
   //Text Inside Tile
-  this.ctx.font = "20px Arial";
+  this.ctx.font = "30px Arial";
   this.ctx.textAlign = "center";
   this.ctx.fillStyle = "black";
-  this.ctx.fillText(this.value, this.x+this.width/2, this.y+this.height/2);
+  this.ctx.fillText(this.value, this.x+this.width/2, this.y+this.height/2 + 5);
 };
 
 Tile.prototype.flashRemoval = function () {
@@ -46,10 +46,10 @@ Tile.prototype.flashRemoval = function () {
   this.ctx.closePath();
 
   //Text Inside Tile
-  this.ctx.font = "20px Arial";
+  this.ctx.font = "30px Arial";
   this.ctx.textAlign = "center";
   this.ctx.fillStyle = "red";
-  this.ctx.fillText(this.value, this.x+this.width/2, this.y+this.height/2);
+  this.ctx.fillText(this.value, this.x+this.width/2, this.y+this.height/2 + 5);
   // this.drawEmptyTile();
   var self = this;
   setTimeout(function(){
