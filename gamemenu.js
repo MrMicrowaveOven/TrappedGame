@@ -9,9 +9,9 @@ function GameMenu(){
   this.playMathButtonHeight = 50;
   // this.playMathButtonXCenter =
 
-  this.playElementsButtonX = 510;
+  this.playElementsButtonX = 480;
   this.playElementsButtonY = 230;
-  this.playElementsButtonWidth = 100;
+  this.playElementsButtonWidth = 160;
   this.playElementsButtonHeight = 50;
 
 
