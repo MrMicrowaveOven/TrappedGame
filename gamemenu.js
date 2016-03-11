@@ -7,6 +7,7 @@ function GameMenu(){
   this.playMathButtonY = 230;
   this.playMathButtonWidth = 100;
   this.playMathButtonHeight = 50;
+  // this.playMathButtonXCenter =
 
   this.playElementsButtonX = 510;
   this.playElementsButtonY = 230;
@@ -64,7 +65,9 @@ GameMenu.prototype.render = function () {
   this.ctx.textAlign = "center";
   this.ctx.fillStyle = "black";
   var title = "Play Math";
-  this.ctx.fillText(title, 260, 255);
+  this.ctx.fillText(title,
+    260,
+    255);
 
 // Play Elements Button
   this.ctx.beginPath();
