@@ -26,11 +26,11 @@
   <center>
 Welcome to my laboratory!  My name is Professor Buttercup, and I could use some help organizing my tiles.
 <br>
-The tiles will fall from the right side.  Go ahead and place the tiles on the grid there, on the left.
+The tiles will fall from the right side.  There's a grid on the left side.  Click a square on the grid to place a tile there.
 <br>
-But don't fill the grid up too much, or I won't have anywhere else to put my tiles!
+Don't fill the grid up too much, or I won't have anywhere else to put my tiles!
 <br>
-So how do you make room for more tiles?  Simple.  If there are ever any two tiles next to each other with the same value (up, down, left, right), BOTH tiles will disappear!
+So how do you make room for more tiles?  Simple.  If there are ever any two tiles next to each other with the same value (up, down, left, right), BOTH tiles will disappear!  Do this to make room for more tiles.
 <br>
 As time goes by the tiles will fall FASTER, so do arrange them carefully.
 <br>
@@ -100,9 +100,9 @@ If you fall too far behind, or if the grid fills up completely, it's game over.
         grid.checkForRemovals(thetile);
       }
     } else if (playing === false && gameDone) {
-        if (clickX > 230 && clickX < 280 && clickY > 230 && clickY < 280){
+        // if (clickX > 230 && clickX < 280 && clickY > 230 && clickY < 280){
           document.location.reload();
-        }
+        // }
     } else if (playing === false && !gameDone) {
       gamemenu.handleClick(clickX, clickY);
     }
@@ -134,15 +134,9 @@ If you fall too far behind, or if the grid fills up completely, it's game over.
     ctx.textAlign = "center";
     ctx.fillStyle = "white";
     var title = "Game over!  You scored " + (well.boxCount - 7) + " points!";
-    var title2 = "Click the red square to play again!"
-    ctx.fillText(title, 230, 150);
-    ctx.fillText(title2, 230, 175);
-
-    ctx.beginPath();
-    ctx.rect(230, 230, 50, 50);
-    ctx.fillStyle = "red";
-    ctx.fill();
-    ctx.closePath();
+    var title2 = "Click the screen to play again!"
+    ctx.fillText(title, canvas.width/2, 150);
+    ctx.fillText(title2, canvas.width/2, 195);
 
   }
 
