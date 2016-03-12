@@ -16,7 +16,6 @@ function Tile(x, y, width, height, row, column) {
 }
 
 Tile.prototype.changeValue = function (val) {
-  // debugger;
   this.filled = true;
   this.value = val;
   this.color = filledTileColor;
@@ -48,12 +47,15 @@ Tile.prototype.flashRemoval = function () {
   //Text Inside Tile
   this.ctx.font = "30px Arial";
   this.ctx.textAlign = "center";
-  this.ctx.fillStyle = "red";
+  this.ctx.fillStyle = tileRemovalText;
   this.ctx.fillText(this.value, this.x+this.width/2, this.y+this.height/2 + 5);
+
   // this.drawEmptyTile();
   var self = this;
   setTimeout(function(){
       self.drawEmptyTile();
+      userScore += 1;
+      showScore();
     }
     , 500);
 

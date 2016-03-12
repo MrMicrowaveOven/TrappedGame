@@ -61,6 +61,8 @@ If you fall too far behind, or if the grid fills up completely, it's game over.
   var clickX;
   var clickY;
 
+  var clickee = true;
+
   var gameType = "addition";
 
   //Tile that was just clicked
@@ -74,17 +76,34 @@ If you fall too far behind, or if the grid fills up completely, it's game over.
   var heightOfBoxes = 60;
   var fallSpeed = 2;
 
-  var emptyTileColor = "darkblue";
-  var filledTileColor = "red";
+  var emptyTileColor = "rgba(23,23,78,1)";
+  var filledTileColor = "rgba(153,51,51,1)";
   var gridBorderColor = "black";
   var boxBorderColor = "black";
-  var boxColor = "red";
-  var tileRemovalColor= "yellow";
+  var boxBorderWidth = 2;
+  var boxColor = "rgba(153,51,51,1)";
+  var tileRemovalColor= "rgba(250, 139, 35, 1)";
+  var tileRemovalText = "black";
 
   var gridX = 50;
-  var gridY = 50;
-  var gridWidth = 400;
-  var gridHeight = 400;
+  var gridY = 100;
+  var gridWidth = 350;
+  var gridHeight = 350;
+
+  var scoreX = 150;
+  var scoreY = 50;
+
+  var userScore = 0;
+
+  function showScore() {
+
+    ctx.clearRect(90,25,310, 50)
+
+    ctx.font = "30px Arial";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "white";
+    ctx.fillText("Score: " + userScore, scoreX, scoreY);
+  }
 
   gamemenu.render();
 
@@ -92,12 +111,16 @@ If you fall too far behind, or if the grid fills up completely, it's game over.
     playing = true;
     ctx.clearRect(0,0,canvas.width, canvas.height);
     grid.drawGrid(gridX, gridY, gridWidth, gridHeight);
+    showScore();
     well.dropABox();
   }
 
   function doMouseDown(event) {
     clickX = event.pageX - canvas.offsetLeft;
     clickY = event.pageY - canvas.offsetTop;
+    if (clickee === true) {
+      console.log("You clicked x=" + clickX + ", and y=" + clickY);
+    }
     if (playing === true && clickX > gridX && clickY > gridY && clickX < gridX + gridWidth && clickY < gridY + gridHeight) {
       thetile = whichtileClicked(clickX, clickY);
       if (thetile !== undefined) {
@@ -106,9 +129,7 @@ If you fall too far behind, or if the grid fills up completely, it's game over.
         grid.checkForRemovals(thetile);
       }
     } else if (playing === false && gameDone) {
-        // if (clickX > 230 && clickX < 280 && clickY > 230 && clickY < 280){
           document.location.reload();
-        // }
     } else if (playing === false && !gameDone) {
       gamemenu.handleClick(clickX, clickY);
     }
@@ -139,7 +160,7 @@ If you fall too far behind, or if the grid fills up completely, it's game over.
     ctx.font = "20px Arial";
     ctx.textAlign = "center";
     ctx.fillStyle = "white";
-    var title = "Game over!  You scored " + (well.boxCount - 7) + " points!";
+    var title = "Game over!  You scored " + userScore + " points!";
     var title2 = "Click the screen to play again!"
     ctx.fillText(title, canvas.width/2, 150);
     ctx.fillText(title2, canvas.width/2, 195);

@@ -15,9 +15,7 @@ function Box(id, bottom) {
 
 // Setting game type
   if (gameType === "addition"){
-    // this.firstNum = Math.floor(Math.random() * 10);
     var firstNum = ADDITION.num1[Math.floor(Math.random() * ADDITION.num1.length)];
-    // this.secondNum = Math.floor(Math.random() * 10);
     var secondNum = ADDITION.num2[Math.floor(Math.random() * ADDITION.num2.length)];
     var totalNum = firstNum + secondNum;
     this.boxfill = firstNum + " + " + secondNum;
@@ -31,7 +29,7 @@ function Box(id, bottom) {
     this.boxAnswer = ELEMENTS[this.boxfill];
   }
 
-  this.borderWidth = "2";
+  this.borderWidth = boxBorderWidth;
 
   this.pathTop = -40;
   this.pathBottom = bottom;
@@ -52,7 +50,7 @@ Box.prototype.drawBox = function() {
   this.ctx.closePath();
 
 // Set font
-  this.ctx.fillStyle = this.borderColor;
+  this.ctx.fillStyle = "black";
   this.ctx.font = "26px Arial";
   ctx.textAlign = "center";
 
@@ -61,7 +59,8 @@ Box.prototype.drawBox = function() {
 
 //Box border
   this.ctx.beginPath();
-  this.ctx.rect(this.boxX, this.boxY, this.width, this.height);
+  this.ctx.rect(this.boxX + this.borderWidth/2, this.boxY + this.borderWidth/2,
+    this.width - this.borderWidth, this.height - this.borderWidth);
   this.ctx.lineWidth = this.borderWidth;
   this.ctx.strokeStyle = this.borderColor;
   this.ctx.stroke();
@@ -70,62 +69,37 @@ Box.prototype.drawBox = function() {
 
 Box.prototype.clearSelf = function () {
   this.ctx.clearRect(
-    this.boxX - 1,
-    this.boxY - 20,
-    this.width + 2,
-    this.height + 20
+    this.boxX,
+    this.boxY,
+    this.width,
+    this.height
   );
 };
 
-Box.prototype.reduceSpeed = function() {
+Box.prototype.bottomCheck = function() {
     this.pathLength = this.pathBottom - this.pathTop;
-    // if (this.boxY === this.pathBottom / 2) {
-    //   this.fallSpeed = this.fallSpeed/2;
-    // }
-    // // if (this.boxStartY === 2*this.pathLength / 3) {
-    // //   this.fallSpeed = this.fallSpeed/2;
-    // // }
-    // if (this.boxStartY === this.pathLength * 3 / 4) {
-    //   this.fallSpeed = this.fallSpeed/2;
-    // }
-    // if (this.boxStartY === this.pathLength * 7 / 8) {
-    //   this.fallSpeed = this.fallSpeed/2;
-    // }
-    if (this.boxY >= this.pathBottom) {
+
+    if (this.boxY >= this.pathBottom - this.fallSpeed) {
       this.fallSpeed = 0;
       this.doneMoving = true;
+      this.clearSelf();
+      this.boxY = this.pathBottom;
+      this.drawBox();
+
       if (this.pathBottom > 60)
       {
-        // clearInterval(killKey);
-
-        well.dropABox();
+          well.dropABox();
       } else {
           clearInterval(well.killKey);
           well.boxes.push(well.fallingBox);
           gameOver();
-          // document.location.reload();
       }
     }
 };
 
 Box.prototype.dropBox = function () {
-  this.ctx.clearRect(
-    this.boxX - 1,
-    this.boxY - 20,
-    this.width + 2,
-    this.height + 17
-  );
-  // this.drawBox(
-  //   this.boxStartX - this.borderWidth - 1,
-  //   this.boxStartY - this.borderWidth - 1,
-  //   this.widthOfBox + this.borderWidth + 1,
-  //   this.heightOfBox + this.borderWidth
-  // );
-
-  this.drawBox();
+  this.clearSelf();
   this.boxY += this.fallSpeed;
-  this.reduceSpeed();
+  this.drawBox();
+  this.bottomCheck();
 };
-
-
-// window.box = Box;

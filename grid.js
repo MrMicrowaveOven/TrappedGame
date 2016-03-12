@@ -4,13 +4,12 @@ function Grid() {
   this.tiles = [];
   this.spaceBetween = 5;
   this.ctx = canvas.getContext("2d");
-
 }
 
 
-Grid.prototype.drawGrid = function(tlx, tly, brx, bry) {
-  var widthOfEach = (brx - tlx)/this.gridX - this.spaceBetween;
-  var heightOfEach = (bry - tly)/this.gridY - this.spaceBetween;
+Grid.prototype.drawGrid = function(tlx, tly, width, height) {
+  var widthOfEach = width/this.gridX - this.spaceBetween;
+  var heightOfEach = height/this.gridY - this.spaceBetween;
 
   var tile;
   var thistileX = tlx;
