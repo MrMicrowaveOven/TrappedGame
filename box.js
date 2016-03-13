@@ -24,6 +24,13 @@ function Box(id, bottom) {
   this.color = "rgba(" + this.red + "," + this.green + "," + this.blue + "," + this.opacity + ")";
 
 // Setting game type
+  if (gameType === "greek") {
+    var sampleSize = Object.keys(GREEK).length;
+    this.boxfill =
+      Object.keys(GREEK)[Math.floor(Math.random() * sampleSize)];
+    this.boxAnswer = GREEK[this.boxfill];
+  }
+
   if (gameType === "addition"){
     var firstNum = ADDITION.num1[Math.floor(Math.random() * ADDITION.num1.length)];
     var secondNum = ADDITION.num2[Math.floor(Math.random() * ADDITION.num2.length)];

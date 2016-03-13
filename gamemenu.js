@@ -5,17 +5,22 @@ function GameMenu(){
 
   this.textCenter = this.canvas.width/2;
 
-  this.playMathButtonX = 190;
-  this.playMathButtonY = 290;
-  this.playMathButtonWidth = 140;
+  this.playMathButtonX = 165;
+  this.playMathButtonY = 270;
+  this.playMathButtonWidth = 160;
   this.playMathButtonHeight = 50;
   // this.playMathButtonXCenter =
 
-  this.playElementsButtonX = 420;
-  this.playElementsButtonY = 290;
+  this.playElementsButtonX = 395;
+  this.playElementsButtonY = 270;
   this.playElementsButtonWidth = 160;
   this.playElementsButtonHeight = 50;
 
+
+  this.playGreekButtonX = 280;
+  this.playGreekButtonY = 340;
+  this.playGreekButtonWidth = 160;
+  this.playGreekButtonHeight = 50;
   //Colors ******************
 
   //Gray
@@ -36,7 +41,8 @@ GameMenu.prototype.handleClick = function (clickX, clickY) {
   if (clickX > this.playMathButtonX &&
     clickX < this.playMathButtonX + this.playMathButtonWidth &&
     clickY > this.playMathButtonY &&
-    clickY < this.playMathButtonY + this.playMathButtonHeight){
+    clickY < this.playMathButtonY + this.playMathButtonHeight
+  ){
       gameType = "addition";
       play();
   }
@@ -44,10 +50,20 @@ GameMenu.prototype.handleClick = function (clickX, clickY) {
   if (clickX > this.playElementsButtonX &&
     clickX < this.playElementsButtonX + this.playElementsButtonWidth &&
     clickY > this.playElementsButtonY &&
-    clickY < this.playElementsButtonY + this.playElementsButtonHeight){
+    clickY < this.playElementsButtonY + this.playElementsButtonHeight
+  ){
       gameType = "elements";
       play();
-    }
+  }
+
+  if (clickX > this.playGreekButtonX &&
+    clickX < this.playGreekButtonX + this.playGreekButtonWidth &&
+    clickY > this.playGreekButtonY &&
+    clickY < this.playGreekButtonY + this.playGreekButtonHeight
+  ){
+      gameType = "greek";
+      play();
+  }
 
 };
 
@@ -65,10 +81,12 @@ GameMenu.prototype.render = function () {
   this.ctx.fillStyle = "rgba(97,208,208,1)";
   var title = "Hello!  Welcome to Trapped!";
   var title2 = "This is a game for learning useful things."
-  var title3 = "What would you like to study?  Addition or Elements?";
-  this.ctx.fillText(title, this.textCenter, 150);
-  this.ctx.fillText(title2, this.textCenter, 190);
-  this.ctx.fillText(title3, this.textCenter, 230);
+  var title3 = "What would you like to study?";
+  var title4 = "Addition, Elements, or the Greek Alphabet?";
+  this.ctx.fillText(title, this.textCenter, 110);
+  this.ctx.fillText(title2, this.textCenter, 150);
+  this.ctx.fillText(title3, this.textCenter, 190);
+  this.ctx.fillText(title4, this.textCenter, 230);
 
 // Play Math Button
   this.ctx.beginPath();
@@ -101,4 +119,20 @@ GameMenu.prototype.render = function () {
   this.ctx.fillText(title,
     this.playElementsButtonX + this.playElementsButtonWidth/2,
     this.playElementsButtonY + this.playElementsButtonHeight/2 + 5);
+
+// Play Greek Button
+  this.ctx.beginPath();
+  this.ctx.rect(this.playGreekButtonX, this.playGreekButtonY,
+    this.playGreekButtonWidth, this.playGreekButtonHeight);
+  this.ctx.fillStyle = this.buttonColor;
+  this.ctx.fill();
+  this.ctx.closePath();
+
+  this.ctx.font = "20px Arial";
+  this.ctx.textAlign = "center";
+  this.ctx.fillStyle = this.buttonTextColor;
+  var title = "Play Greek";
+  this.ctx.fillText(title,
+    this.playGreekButtonX + this.playGreekButtonWidth/2,
+    this.playGreekButtonY + this.playGreekButtonHeight/2 + 5);
 };
