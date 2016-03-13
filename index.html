@@ -61,7 +61,7 @@ If you fall too far behind, or if the grid fills up completely, it's game over.
   var clickX;
   var clickY;
 
-  var clickee = true;
+  var clickee = false;
 
   var gameType = "addition";
 
@@ -79,9 +79,15 @@ If you fall too far behind, or if the grid fills up completely, it's game over.
   var emptyTileColor = "rgba(23,23,78,1)";
   var filledTileColor = "rgba(153,51,51,1)";
   var gridBorderColor = "black";
-  var boxBorderColor = "black";
+
   var boxBorderWidth = 2;
-  var boxColor = "rgba(153,51,51,1)";
+
+  var boxRed = 153;
+  var boxGreen = 51;
+  var boxBlue = 51;
+  var boxOpacity = 1.0;
+  var boxColor = "rgba(boxRed,boxGreen,boxBlue,boxOpacity)";
+
   var tileRemovalColor= "rgba(250, 139, 35, 1)";
   var tileRemovalText = "black";
 
@@ -97,7 +103,7 @@ If you fall too far behind, or if the grid fills up completely, it's game over.
 
   function showScore() {
 
-    ctx.clearRect(90,25,310, 50)
+    ctx.clearRect(scoreX - 60,scoreY - 25,scoreX + 160, scoreY)
 
     ctx.font = "30px Arial";
     ctx.textAlign = "center";

@@ -34,7 +34,7 @@ Well.prototype.removeABox = function () {
     });
     //Remove the one box from the queue
     var placed = this.boxes.shift();
-
+    placed.slideLeft();
     //Make the falling box fall further this time.
     this.fallingBox.pathBottom += this.fallingBox.height;
 // debugger;
@@ -47,7 +47,8 @@ Well.prototype.removeABox = function () {
   } else {
     //If a falling box was placed
     clearInterval(this.killKey);
-    this.fallingBox.clearSelf();
+    this.fallingBox.slideLeft();
+    // this.fallingBox.clearSelf();
     var fallValue = this.fallingBox.boxAnswer;
     this.fallingBox = "";
     this.dropABox();

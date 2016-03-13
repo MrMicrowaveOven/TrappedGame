@@ -5,13 +5,23 @@ function Box(id, bottom) {
     this.id = 1;
   }
 
-  this.boxX = 490;
+  this.boxX = 530;
   this.boxY = -40;
   this.height = heightOfBoxes;
   this.width = 140;
   this.fallSpeed = fallSpeed;
-  this.color = boxColor;
-  this.borderColor = boxBorderColor;
+
+  this.red = boxRed;
+  this.green = boxGreen;
+  this.blue = boxBlue;
+  this.opacity = boxOpacity;
+
+  this.fontOpacity = 1;
+
+  this.borderOpacity = 1;
+  this.borderColor = "rgba(0,0,0," + this.borderOpacity + ")";
+
+  this.color = "rgba(" + this.red + "," + this.green + "," + this.blue + "," + this.opacity + ")";
 
 // Setting game type
   if (gameType === "addition"){
@@ -41,6 +51,28 @@ function Box(id, bottom) {
 
 }
 
+Box.prototype.slideLeft = function () {
+  var self = this;
+  var killInterval = setInterval(
+    function() {
+      self.clearSelf();
+      self.boxX -= 2;
+      self.opacity -= 0.02;
+      self.borderOpacity -= 0.02;
+      self.fontOpacity -= 0.02;
+      self.color = "rgba(" + self.red + "," + self.green + "," + self.blue + "," + self.opacity + ")";
+      self.borderColor = "rgba(0,0,0," + self.borderOpacity + ")";
+      if (well.boxes.length > 0) {
+        well.boxes[0].drawBox();
+      }
+      console.log(self.opacity);
+      self.drawBox();
+    }, 5
+  );
+  setTimeout(function() {clearInterval(killInterval);}, 320);
+  // this.clearSelf();
+};
+
 Box.prototype.drawBox = function() {
 //Box fill
   this.ctx.beginPath();
@@ -50,7 +82,7 @@ Box.prototype.drawBox = function() {
   this.ctx.closePath();
 
 // Set font
-  this.ctx.fillStyle = "black";
+  this.ctx.fillStyle = "rgba(0,0,0," + this.fontOpacity + ")";
   this.ctx.font = "26px Arial";
   ctx.textAlign = "center";
 
