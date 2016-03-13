@@ -99,7 +99,7 @@ GameMenu.prototype.render = function () {
   var title = "Hello!  Welcome to Trapped!";
   var title2 = "This is a game for learning useful things."
   var title3 = "What would you like to study?";
-  var title4 = "Addition, Elements, the Greek Alphabet, or the Roman Numberals?";
+  var title4 = "Addition, Elements, the Greek Alphabet, or the Roman Numerals?";
   this.ctx.fillText(title, this.textCenter, 110);
   this.ctx.fillText(title2, this.textCenter, 150);
   this.ctx.fillText(title3, this.textCenter, 190);
