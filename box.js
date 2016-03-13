@@ -5,7 +5,7 @@ function Box(id, bottom) {
     this.id = 1;
   }
 
-  this.boxX = 530;
+  this.boxX = boxStartX;
   this.boxY = -40;
   this.height = heightOfBoxes;
   this.width = 140;
@@ -65,11 +65,17 @@ Box.prototype.slideLeft = function () {
       if (well.boxes.length > 0) {
         well.boxes[0].drawBox();
       }
-      console.log(self.opacity);
+      // console.log(self.opacity);
       self.drawBox();
     }, 5
   );
-  setTimeout(function() {clearInterval(killInterval);}, 320);
+  setTimeout(function() {
+    clearInterval(killInterval);
+    if (self.boxX + self.width > boxStartX) {
+      self.boxX = boxStartX - self.width;
+    }
+    self.clearSelf();
+  }, 320);
   // this.clearSelf();
 };
 
