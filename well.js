@@ -16,7 +16,7 @@ Well.prototype.dropABox = function () {
 
   var bottom = (gridY + gridHeight - heightOfBoxes - 5) - this.boxes.length * (heightOfBoxes);
   this.boxCount += 1;
-  if (this.boxCount % 20 === 0) {fallSpeed = fallSpeed+1};
+  if (this.boxCount % 20 === 0) {fallSpeed = fallSpeed+0.5};
 
   this.fallingBox = new Box(this.boxCount, bottom);
 
