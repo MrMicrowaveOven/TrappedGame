@@ -60,6 +60,7 @@ GameMenu.prototype.handleClick = function (clickX, clickY) {
     clickY > this.HTPButtonY &&
     clickY < this.HTPButtonY + this.HTPButtonHeight
   ){
+      howtoplayState = true;
       howtoplay.begin();
   }
 
