@@ -103,6 +103,7 @@ GameMenu.prototype.handleClick = function (clickX, clickY) {
 };
 
 GameMenu.prototype.render = function () {
+  this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
   this.ctx.beginPath();
   this.ctx.rect(this.menuBorder, this.menuBorder,
     this.canvas.width - this.menuBorder*2,
