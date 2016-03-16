@@ -11,13 +11,13 @@ function HowToPlay() {
   this.profH = 200;
 
   this.ss1 = new Image();
-  this.ss1.src = "images/falling.jpg";
+  this.ss1.src = "Images/falling.jpg";
   this.ss2 = new Image();
-  this.ss2.src = "images/placing.jpg";
+  this.ss2.src = "Images/placing.jpg";
   this.ss3 = new Image();
-  this.ss3.src = "images/clearing.jpg";
+  this.ss3.src = "Images/clearing.jpg";
   this.ss4 = new Image();
-  this.ss4.src = "images/losing.jpg";
+  this.ss4.src = "Images/losing.jpg";
 
 
   this.htpPage = 0;
