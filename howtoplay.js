@@ -41,12 +41,12 @@ HowToPlay.prototype.begin = function () {
 //Draw professor
   var prof = new Image();
   var self = this;
-  prof.src = "Images/professor.gif";
-  prof.onload = function(){
+  prof.src = "Images/professor.png";
+  prof.onload = function() {
     self.ctx.drawImage(
       prof,
-      0, 0, 350, 410,
-      self.profX, self.profY, self.profW, self.profH
+      self.profX, self.profY,
+      self.profW, self.profH
     );
   };
 
