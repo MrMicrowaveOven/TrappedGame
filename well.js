@@ -20,7 +20,8 @@ Well.prototype.dropABox = function () {
 
   if (this.boxCount % 20 === 0) {
     this.initialAccFactor += 0.25;
-    fallSpeed += Math.log(this.initialAccFactor)/2;
+    acceleration += 1;
+    fallSpeed = Math.log(acceleration);
     console.log(fallSpeed);
   };
 

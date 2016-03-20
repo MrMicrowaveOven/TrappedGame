@@ -108,9 +108,9 @@ Box.prototype.drawBox = function() {
 Box.prototype.clearSelf = function () {
   this.ctx.clearRect(
     this.boxX,
-    this.boxY,
+    this.boxY - this.fallSpeed,
     this.width,
-    this.height
+    this.height + this.fallSpeed + 1
   );
 };
 
