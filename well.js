@@ -22,7 +22,7 @@ Well.prototype.dropABox = function () {
     this.initialAccFactor += 0.25;
     acceleration += 1;
     fallSpeed = Math.log(acceleration);
-    console.log(fallSpeed);
+    console.log("Your fall speed is now " + fallSpeed + ".");
   };
 
   this.fallingBox = new Box(this.boxCount, bottom);
