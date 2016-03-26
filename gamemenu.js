@@ -4,33 +4,36 @@ function GameMenu(){
   this.menuBorder = 50;
 
   this.textCenter = this.canvas.width/2;
+  this.textTop = 110;
+  this.textBetween = 45;
 
-  this.HTPButtonX = 280;
-  this.HTPButtonY = 230;
-  this.HTPButtonWidth = 160;
+
+  this.HTPButtonX = 500;
+  this.HTPButtonY = 80;
+  this.HTPButtonWidth = 140;
   this.HTPButtonHeight = 45;
 
 
-  this.playMathButtonX = 165;
-  this.playMathButtonY = 290;
+  this.playMathButtonX = 180;
+  this.playMathButtonY = 280;
   this.playMathButtonWidth = 160;
   this.playMathButtonHeight = 50;
   // this.playMathButtonXCenter =
 
-  this.playElementsButtonX = 395;
-  this.playElementsButtonY = 290;
+  this.playElementsButtonX = 380;
+  this.playElementsButtonY = 280;
   this.playElementsButtonWidth = 160;
   this.playElementsButtonHeight = 50;
 
 
-  this.playGreekButtonX = 165;
-  this.playGreekButtonY = 360;
+  this.playGreekButtonX = 180;
+  this.playGreekButtonY = 355;
   this.playGreekButtonWidth = 160;
   this.playGreekButtonHeight = 50;
 
 
-  this.playRomanButtonX = 395;
-  this.playRomanButtonY = 360;
+  this.playRomanButtonX = 380;
+  this.playRomanButtonY = 355;
   this.playRomanButtonWidth = 160;
   this.playRomanButtonHeight = 50;
 
@@ -119,10 +122,10 @@ GameMenu.prototype.render = function () {
   var title2 = "This is a game for learning useful things.";
   var title3 = "What would you like to study?";
   var title4 = "Addition, Elements, the Greek Alphabet, or the Roman Numerals?";
-  this.ctx.fillText(title, this.textCenter, 90);
-  this.ctx.fillText(title2, this.textCenter, 130);
-  this.ctx.fillText(title3, this.textCenter, 170);
-  this.ctx.fillText(title4, this.textCenter, 210);
+  this.ctx.fillText(title, this.textCenter, this.textTop);
+  this.ctx.fillText(title2, this.textCenter, this.textTop + this.textBetween);
+  this.ctx.fillText(title3, this.textCenter, this.textTop + 2*this.textBetween);
+  this.ctx.fillText(title4, this.textCenter, this.textTop + 3*this.textBetween);
 
   // How To Play Button
   this.ctx.beginPath();
