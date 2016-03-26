@@ -11,8 +11,7 @@ function Well(){
   // this.gametype = gameType;
 }
 
-
-Well.prototype.dropABox = function () {
+Well.prototype.gridFullCheck = function () {
   if (this.grid.isFull()) {
     this.dying += 1;
     if (this.dying > 2) {
@@ -21,6 +20,10 @@ Well.prototype.dropABox = function () {
       gameOver();
     }
   }
+};
+
+Well.prototype.dropABox = function () {
+  // this.gridFullCheck();
   if (this.fallingBox !== "") {this.boxes.push(this.fallingBox);}
 
   if (this.killKey !=="") {clearInterval(this.killKey);}
