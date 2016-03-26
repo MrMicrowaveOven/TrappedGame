@@ -2,7 +2,7 @@
 
 Trapped is an educational game for learning useful things.
 
-![alt text](GIF.gif "Trapped!")
+![alt text](Gif.gif "Trapped!")
 
 Click [here] (http://mrmicrowaveoven.github.io/TrappedGame/ "Play Trapped") to start playing!
 
