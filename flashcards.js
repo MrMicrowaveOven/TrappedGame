@@ -46,6 +46,7 @@ var ROMAN = {I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6, VII: 7, VIII: 8, IX: 9,
 var ADDITION = {num1: [0,1,2,3,4,5,6,7,8,9,10], num2: [0,1,2,3,4,5,6,7,8,9,10]};
 
 var GREEK = {
+  // Uppercase
   // Alpha: "\u0391",
   // Beta: "\u0392",
   // Gamma: "\u0393",
@@ -70,6 +71,7 @@ var GREEK = {
   // Chi: "\u03A7",
   // Psi: "\u03A8",
   // Omega: "\u03A9",
+  // Lowercase
   alpha: "\u03B1",
   beta: "\u03B2",
   gamma: "\u03B3",
