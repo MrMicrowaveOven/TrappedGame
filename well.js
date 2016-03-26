@@ -6,11 +6,21 @@ function Well(){
   this.boxCount = 0;
   this.killKey = "";
   this.initialAccFactor = 1.0;
+  this.dying = 0;
+  this.grid = grid;
   // this.gametype = gameType;
 }
 
 
 Well.prototype.dropABox = function () {
+  if (this.grid.isFull()) {
+    this.dying += 1;
+    if (this.dying > 2) {
+      clearInterval(this.killKey);
+      // new Box(this.boxCount, 0)
+      gameOver();
+    }
+  }
   if (this.fallingBox !== "") {this.boxes.push(this.fallingBox);}
 
   if (this.killKey !=="") {clearInterval(this.killKey);}
@@ -40,12 +50,14 @@ Well.prototype.removeABox = function () {
     this.boxes.forEach(function(box) {
       box.clearSelf();
     });
+
     //Remove the one box from the queue
     var placed = this.boxes.shift();
     placed.slideLeft();
+
     //Make the falling box fall further this time.
     this.fallingBox.pathBottom += this.fallingBox.height;
-// debugger;
+
     //Restack boxes
     this.boxes.forEach(function(box) {
       box.boxY += box.height;
@@ -56,7 +68,6 @@ Well.prototype.removeABox = function () {
     //If a falling box was placed
     clearInterval(this.killKey);
     this.fallingBox.slideLeft();
-    // this.fallingBox.clearSelf();
     var fallValue = this.fallingBox.boxAnswer;
     this.fallingBox = "";
     this.dropABox();

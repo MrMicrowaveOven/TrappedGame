@@ -6,9 +6,9 @@ function GameMenu(){
   this.textCenter = this.canvas.width/2;
 
   this.HTPButtonX = 280;
-  this.HTPButtonY = 240;
+  this.HTPButtonY = 230;
   this.HTPButtonWidth = 160;
-  this.HTPButtonHeight = 40;
+  this.HTPButtonHeight = 45;
 
 
   this.playMathButtonX = 165;
@@ -119,10 +119,10 @@ GameMenu.prototype.render = function () {
   var title2 = "This is a game for learning useful things.";
   var title3 = "What would you like to study?";
   var title4 = "Addition, Elements, the Greek Alphabet, or the Roman Numerals?";
-  this.ctx.fillText(title, this.textCenter, 110);
-  this.ctx.fillText(title2, this.textCenter, 150);
-  this.ctx.fillText(title3, this.textCenter, 190);
-  this.ctx.fillText(title4, this.textCenter, 230);
+  this.ctx.fillText(title, this.textCenter, 90);
+  this.ctx.fillText(title2, this.textCenter, 130);
+  this.ctx.fillText(title3, this.textCenter, 170);
+  this.ctx.fillText(title4, this.textCenter, 210);
 
   // How To Play Button
   this.ctx.beginPath();

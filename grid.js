@@ -1,6 +1,8 @@
 function Grid() {
+  // Number of tiles on the grid: 25 (5x5)
   this.gridX = 5;
   this.gridY = 5;
+
   this.tiles = [];
   this.spaceBetween = 5;
   this.ctx = canvas.getContext("2d");
@@ -53,6 +55,16 @@ Grid.prototype.removeTiles = function (removeTheseTiles) {
   removeTheseTiles.forEach(function(tile) {
     tile.flashRemoval();
   });
+};
+
+Grid.prototype.isFull = function () {
+  var full = true;
+  this.tiles.forEach(function(tile) {
+      if (!tile.filled || tile.color === tileRemovalColor) {
+        full = false;
+      }
+  });
+  return full;
 };
 
 Grid.prototype.getAdjacentTiles = function (centerTile) {
