@@ -1,0 +1,13 @@
+.footer_contact_info {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer_info {
+  display: flex;
+  justify-content: center;
+}
+
+.contact_link {
+  padding-left: 3px
+}
